@@ -1,0 +1,9 @@
+[submodule "Winsper-AdminService"]
+	path = Winsper-AdminService
+	url = https://github.com/mosaikerors/Winsper-AdminService
+[submodule "Winsper-UserService"]
+	path = Winsper-UserService
+	url = https://github.com/mosaikerors/Winsper-UserService
+[submodule "Winsper-FrontEnd"]
+	path = Winsper-FrontEnd
+	url = https://github.com/mosaikerors/Winsper-FrontEnd
