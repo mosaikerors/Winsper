@@ -1,0 +1,18 @@
+[submodule "Winsper-AdminService"]
+	path = Winsper-AdminService
+	url = https://github.com/mosaikerors/Winsper-AdminService
+[submodule "Winsper-UserService"]
+	path = Winsper-UserService
+	url = https://github.com/mosaikerors/Winsper-UserService
+[submodule "Winsper-FrontEnd"]
+	path = Winsper-FrontEnd
+	url = https://github.com/mosaikerors/Winsper-FrontEnd
+[submodule "Winsper-Consumer"]
+	path = Winsper-Consumer
+	url = git@github.com:mosaikerors/Winsper-Consumer.git
+[submodule "Winsper-HeanService"]
+	path = Winsper-HeanService
+	url = git@github.com:mosaikerors/Winsper-HeanService.git
+[submodule "Winsper-EurekaServer"]
+	path = Winsper-EurekaServer
+	url = git@github.com:mosaikerors/Winsper-EurekaServer.git
