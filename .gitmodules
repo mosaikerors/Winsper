@@ -16,3 +16,6 @@
 [submodule "Winsper-EurekaServer"]
 	path = Winsper-EurekaServer
 	url = git@github.com:mosaikerors/Winsper-EurekaServer.git
+[submodule "Winsper-Zuul"]
+	path = Winsper-Zuul
+	url = git@github.com:mosaikerors/Winsper-Zuul.git
