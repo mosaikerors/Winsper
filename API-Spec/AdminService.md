@@ -2,6 +2,15 @@
 #### port:7120
 **注意，中文可能返回的是乱码!!!**
 
+## 认证
+
+在 request header 里加上 `uId`, `token` 两个字段：
+
+```json
+uId: Long
+Authorization: Bearer jwt.token.here
+```
+
 ## 查询所有用户(不含其他管理员)
 
 `GET /admin/admin/userList` （需要认证）

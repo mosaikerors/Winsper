@@ -2,6 +2,15 @@
 #### port:7120
 **注意，中文可能返回的是乱码!!!**
 
+## 认证
+
+在 request header 里加上 `uId`, `token` 两个字段：
+
+```json
+uId: Long
+Authorization: Bearer jwt.token.here
+```
+
 ## 凭手机号获取验证码
 
 `POST /user/user/sendCode` （不需要认证）
@@ -41,7 +50,7 @@ response body:
   }
   ```
 
-## 登录？
+## 注册
 
 `POST /user/user/signup` （不需要认证）
 
@@ -100,7 +109,8 @@ request body:
 
   ```json
   {
-      "uId": Long
+      "uId": Long,
+      "token": String
   }
   ```
 
