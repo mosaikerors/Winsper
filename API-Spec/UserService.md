@@ -37,7 +37,7 @@ response body:
   ```json
   {
       "message": "ok",
-      "token": String
+      "token": String  //用 code 加密 phone
   }
   ```
 
@@ -51,7 +51,10 @@ request body:
 ```json
 {
     "token": String,
-    "phone": String
+    "phone": String,
+    "code": String,
+    "username": String,
+    "password": String
 }
 ```
 response body:
@@ -88,7 +91,8 @@ request body:
 
   ```json
    {
-      "phone": String
+      "phone": String,
+      "password": String
    }
   ```
 
