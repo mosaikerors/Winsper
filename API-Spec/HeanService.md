@@ -13,7 +13,7 @@ Authorization: Bearer jwt.token.here
 
 ## 根据uID查找用户所有历史函
 
-`POST /hean/hean/byUId` （需要认证）
+`POST /hean/byUId` （需要认证）
 
 request body:
 
@@ -55,7 +55,7 @@ response body:
 
 ## 查找所有函
 
-`GET /hean/hean/all` （需要认证）
+`GET /hean/all` （需要认证）
 
 response body:
 
@@ -81,7 +81,7 @@ response body:
 
 ## 根据hID删除该函
 
-`DELETE /hean/hean/delete` （需要认证）
+`DELETE /hean/delete` （需要认证）
 
 request body:
 

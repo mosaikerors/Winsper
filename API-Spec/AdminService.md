@@ -13,7 +13,7 @@ Authorization: Bearer jwt.token.here
 
 ## 查询所有用户(不含其他管理员)
 
-`GET /admin/admin/userList` （需要认证）
+`GET /admin/userList` （需要认证）
 
 response body:
 
@@ -43,7 +43,7 @@ response body:
 
 ## 根据uId解禁/封禁用户
 
-`POST /admin/admin/manage` （需要认证）
+`POST /admin/manage` （需要认证）
 
 request body:
 

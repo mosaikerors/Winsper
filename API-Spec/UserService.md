@@ -13,7 +13,7 @@ Authorization: Bearer jwt.token.here
 
 ## 凭手机号获取验证码
 
-`POST /user/user/sendCode` （不需要认证）
+`POST /user/sendCode` （不需要认证）
 
 request body:
 
@@ -52,7 +52,7 @@ response body:
 
 ## 注册
 
-`POST /user/user/signup` （不需要认证）
+`POST /user/signup` （不需要认证）
 
 request body:
 
@@ -92,7 +92,7 @@ response body:
 若token过期，就要求重新进行第一次登录
 token是用uId构建的
 
-`POST /user/user/login` 
+`POST /user/login` 
 
 request body:
 
@@ -105,7 +105,7 @@ request body:
    }
   ```
 
-+ 后需登录 （需要认证）
++ 后需登录 （需要认证，**例外：认证所需的 uId 和 token 放在 body 里**）
 
   ```json
   {
@@ -146,7 +146,7 @@ response body:
 
 ## 更新用户名
 
-`PUT /user/user/updateInfo` （需要认证）
+`PUT /user/updateInfo` （需要认证）
 
 request body:
 
