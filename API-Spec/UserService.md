@@ -105,7 +105,7 @@ request body:
    }
   ```
 
-+ 后需登录 （需要认证，**例外：认证所需的 uId 和 token 放在 body 里**）
++ 后续登录 （需要认证，**例外：认证所需的 uId 和 token 放在 body 里**）
 
   ```json
   {
