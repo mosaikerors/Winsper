@@ -63,4 +63,8 @@
   >
   > require 中的图片名字必须是一个**静态字符串**（不能使用变量！因为 require 是在编译时期执行，而非运行时期执行！）。
 
-##### Last-modified date: 2019.7.1, 8 p.m.
++ `setInterval` 中的第一个参数最好是箭头函数，如果只写函数名会报玄学错误。
+
+  即 `()=>this.update()` 和 `this.update` 的区别。
+
+##### Last-modified date: 2019.7.11, 7 p.m.
