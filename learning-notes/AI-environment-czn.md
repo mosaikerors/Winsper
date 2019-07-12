@@ -11,7 +11,7 @@
 
 ### 2.1 创建虚拟环境
 ```
-conda create -n [your env name] aqlite
+conda create -n [your env name] sqlite
 ```
 ```
 activete [your env name] #进入虚拟环境
