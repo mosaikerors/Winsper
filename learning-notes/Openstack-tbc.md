@@ -6,6 +6,8 @@
 
 1个 master，3个 slave，内存分配为 8, 4, 4, 4 。
 
+（其实可以任意分配，只是要搭 k8s 的话需要一个 master）
+
 #### 创建 master
 
 1. 实例 -> 创建实例
@@ -115,6 +117,8 @@
 
 ### 连接实例
 
+#### 让更多的机器可以访问 master
+
 现在只有一台机器可以用 `ssh root@202.120.40.8 -p30xx0` 连接到 master，要让更多机器可以访问 master，执行以下步骤：
 
 1. 依照*创建 master 的第 5 步*获取到自己机器的公钥。
@@ -129,10 +133,38 @@
 
 3. 可访问 master 的机器数量 +1 ✔
 
+#### 快捷访问
+
+每次连接 master 或是 slave 都要通过 `ssh root@ip`，可以通过配置文件来快捷访问。
+
+在 master  的 `~/.ssh` 目录下新建文件 `config`:
+
+```
+Host ${name}
+	HostName 202.120.40.8
+	User root
+	Port 30xx0
+```
+
+之后就可以通过 `ssh ${name}` 来快捷访问 master。
+
+在 slave 的 `~/.ssh` 目录下新建文件 `config`:
+
+```
+Host ${name}
+	HostName 10.0.0.x
+	User root
+```
+
+之后就可以**在 master 中**通过 `ssh ${name}` 来快捷访问 slave。
+
 ### Troubleshooting
 
 + 连接过一台 master 之后删了 master 又新建 master 发现连不上去了
   + 原因：连接其他机器会在本机 `.ssh` 目录下的 `known_hosts` 文件保存该机器所在的 ip 和端口的信息，当这个 ip 和端口变成其他机器时会发生访问错误。
   + 解决办法：将 `.ssh` 目录下的 `known_hosts` 文件中和该 ip，端口有关的信息删掉，重新连接。
++ 配置步骤一些正常，还是无法访问 master
+  + 原因：可能是安全组没有开放
+  + 解决办法：网络 -> 安全组 -> 添加规则 -> 方向：入口 -> 开放安全组
 
-##### Last-modified date: 2019.7.12, 2 p.m.
+##### Last-modified date: 2019.7.13, 10 a.m.
