@@ -19,4 +19,14 @@
 
   尽管可以出现类似 `actions.size === 5` 而 `index === 2` 的情况，但是此时导航栈中只会保留 actions 中的前三个 screen，第四个和第五个应该是被丢弃了，所以我不是很明白为什么可以指定 index（直接 `index === actions.size - 1` 不就好了吗- -）
 
++ 设置 tabBar 背景颜色：
+
+  ```react
+  tabBarOptions: {
+  	style:{ backgroundColor: 'cyan' }
+  }
+  ```
+
++ 
+
 ##### Last-modified date: 2019.7.5, 6 p.m.

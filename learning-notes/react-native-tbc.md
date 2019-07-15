@@ -67,4 +67,33 @@
 
   即 `()=>this.update()` 和 `this.update` 的区别。
 
-##### Last-modified date: 2019.7.11, 7 p.m.
++ 用 `react-native-amap3d` 高德地图包时，会报 :app:transformDexArchiveWithExternalLibsDexMergerForDebug 类似的错误，解决方法是在 `app/build.gradle` 文件中加上这一行：
+
+  ```
+  android {
+  	defaultConfig {
+          applicationId "com.front_end"
+          minSdkVersion rootProject.ext.minSdkVersion
+          targetSdkVersion rootProject.ext.targetSdkVersion
+          versionCode 1
+          versionName "1.0"
+          multiDexEnabled true    # here
+      }
+  }
+  ```
+
++ 调用安卓原生定位接口：
+
+  ```react
+  import Geolocation from 'Geolocation'
+  
+  Geolocation.getCurrentPosition(data => {
+                          console.log(data.coords)
+                      }, e => {
+                          console.log(e, 'error');
+                      },
+                      { enableHignAccuracy: false, timeout: 20000, maximumAge: 10000 }
+  )  //make sure geolocation won't get timeout
+  ```
+
+##### Last-modified date: 2019.7.15, 8 p.m.
