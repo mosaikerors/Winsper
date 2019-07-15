@@ -140,7 +140,13 @@ response body:
       "token": String,
       "uId": Long,
       "username": String,
-      "status": Integer
+      "status": Integer,
+      "feather": Integer,    //new
+      "mutualFollow": Integer,    //new
+      "following": Integer,     //new
+      "followers": Integer,     //new
+      "hasChecked": Bool,      //new
+      "avater": url       //new
   }
   ```
 
@@ -180,6 +186,30 @@ response body:
   ```json
   {
       "message": "ok"
+  }
+  ```
+
+
+## 签到
+
+`POST /user/check` （需要认证）
+
+response body:
+
++ if succeed
+
+  ```json
+  {
+      "message": "ok",
+      "newFeather": Integer
+  }
+  ```
+
++ if has checked
+
+  ```json
+  {
+      "message": "has checked"
   }
   ```
 
