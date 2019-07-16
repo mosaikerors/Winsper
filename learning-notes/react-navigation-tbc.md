@@ -1,4 +1,4 @@
-+ `reset` 重置导航栈
++ `设置 bottom tab 在某些页面不可见时，拆掉 StackNavigator 的 AppContainer 包装就可以了。reset` 重置导航栈
 
   ```react
   const login = StackActions.reset({
@@ -27,6 +27,6 @@
   }
   ```
 
-+ 
++ 设置 bottom tab 在某些页面不可见时，拆掉 StackNavigator 的 AppContainer 包装就可以了。
 
-##### Last-modified date: 2019.7.5, 6 p.m.
+##### Last-modified date: 2019.7.16, 10 a.m.

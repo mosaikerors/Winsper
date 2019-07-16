@@ -96,4 +96,4 @@
   )  //make sure geolocation won't get timeout
   ```
 
-##### Last-modified date: 2019.7.15, 8 p.m.
+##### Last-modified date: 2019.7.16, 10 a.m.
