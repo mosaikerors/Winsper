@@ -75,11 +75,15 @@ response body:
         "avatar": url,
         "username": String,
         "createdTime": Long,
+        "text":String
         "pics": [
             url1, url2, url3, url4   //可以有0~4张
         ],
         "hasLiked": bool,   //是否点过赞
         "hasStarred": bool,   //是否已收藏
+        "likeCount": Integer,   //点赞数
+        "starCount": Integer,   //收藏数
+        "commentCount": Integer,  //评论数
         "comments": [
             {
                 "commentId": String,
