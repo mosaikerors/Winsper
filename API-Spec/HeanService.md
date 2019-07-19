@@ -11,17 +11,42 @@ uId: Long
 Authorization: Bearer jwt.token.here
 ```
 
-## 获取所有函的位置
+## exception
 
-场景：进入地图页面需要在有函的位置上标点
+对于所有**非预期**的响应（如被熔断），除了特别指明场景及对应的 rescode 以外，均返回以下内容：
 
-`GET /hean/point/all` （需要认证）
+```json
+{
+    "rescode": 1
+}
+```
+
+对于所有**认证失败**的请求，返回以下内容：
+
+```json
+{
+    "rescode": 2
+}
+```
+
+## 获取函的位置
+
+场景：进入地图页面需要在有函的位置上标点，有四个过滤选项
+
++ 只显示我关注的人的函：`follower=${uId}`
++ 只显示互相关注的人的函：`mutualFollow=${uId}`
++ 只显示周围*50m/100m/200m/500m*内的函：`nearby=50|100|200|500`
++ 只显示最近*1天/1周/1月/1年*内的函：`recent=day|week|month|year`
+
+如果 url 后没有附带某个过滤选项，说明对该选项不做过滤，即全部显示。
+
+`GET /hean/point` （需要认证）
 
 response body:
 
 ```json
 {
-    "message": "ok",
+    "rescode": 0,
     "heans": [
         {
             "hId": String,
@@ -40,11 +65,13 @@ response body:
 
 `GET /hean/card?hId=1&uId=1` （需要认证）
 
+其中，uId 是正在浏览别人函的用户的 id
+
 response body:
 
 ```json
 {
-    "message": "ok",
+    "rescode": 0,
     "heanCard": {
         "hId": String,
         "cover": url,
@@ -58,6 +85,16 @@ response body:
 }
 ```
 
+### exception
+
+#### 该函对于该用户不可见
+
+```json
+{
+    "rescode": 3
+}
+```
+
 ## 获取函的具体内容
 
 场景：点击卡片形式的函后呈现的内容
@@ -68,33 +105,44 @@ response body:
 
 ```json
 {
-    "message": "ok",
+    "rescode": 0,
     "hean": {
         "hId": String,
         "uId": Long,
         "avatar": url,
         "username": String,
         "createdTime": Long,
-        "text":String
         "pics": [
-            url1, url2, url3, url4   //可以有0~4张
+            url1, url2, url3, url4   // 可以有0~4张
         ],
-        "hasLiked": bool,   //是否点过赞
-        "hasStarred": bool,   //是否已收藏
-        "likeCount": Integer,   //点赞数
-        "starCount": Integer,   //收藏数
-        "commentCount": Integer,  //评论数
         "comments": [
             {
                 "commentId": String,
-            	"commenter": String,  //评论者username
-                "commented": String,  //被评论者username，如果直接评论函，这个字段是空
-                "time": Long,   //评论时间
-                "content" String  //评论内容
+                "commenter": {    // 评论者id，name，avatar
+                	"uId": 1,
+                	"username": "username1",
+                	"avatar": url
+            	},
+                "commented": {    // 被评论者id，name，如果直接评论的是函，则commented字段为null
+                	"uId": 2,
+                	"username": "username2",
+            	},
+                "time": Long,   // 评论时间
+                "content": String  // 评论内容
             },
-            ...   //可以有多条评论
+            ...   // 可以有多条评论
         ]
     }
+}
+```
+
+### exception
+
+#### 该函对于该用户不可见
+
+```json
+{
+    "rescode": 3
 }
 ```
 
@@ -108,40 +156,50 @@ request header 不同，request body 相同
 
 `GET /hean/card?owner=1&viewer=2` （需要认证）
 
-owner 是被看的函的主人的 uId，viewer 是正在看函的人的 uId
+其中，owner 是被看的函的主人的 uId，viewer 是正在看函的人的 uId
 
 ### 根据uId查找用户收藏
 
 `GET /hean/collection?owner=1&viewer=2` （需要认证）
 
+owner 和 viewer 的语义同上
+
 ### response body
 
-+ if uId exists and at least one hean exists
+```json
+{
+    "rescode": 0,
+    "heanCards": [
+    	{
+        	"hId": String,
+        	"cover": url,
+        	"text": String,
+        	"likeCount": Integer,   //点赞数
+        	"starCount": Integer,   //收藏数
+        	"commentCount": Integer,  //评论数
+    	},
+        ...  
+    ]
+}
+```
 
-  ```json
-  {
-      "message": "ok",
-      "heanCards": [
-      	{
-          	"hId": String,
-          	"cover": url,
-          	"text": String,
-          	"likeCount": Integer,   //点赞数
-          	"starCount": Integer,   //收藏数
-          	"commentCount": Integer,  //评论数
-      	},
-          ...  
-      ]
-  }
-  ```
+### exception
 
-+ if no hean is found
+#### 该函或收藏对于该用户不可见
 
-  ```json
-  {
-      "message": "not found"
-  }
-  ```
+```json
+{
+    "rescode": 3
+}
+```
+
+#### 该用户没有函或收藏
+
+```json
+{
+    "rescode": 4
+}
+```
 
 ## 新建函
 
@@ -158,38 +216,38 @@ request :  (**form-data**)
 
 response body:
 
-- if upload successfully
+```json
+{
+    "rescode": 0
+}
+```
 
-  ```json
-  {
-      "message": "ok",
-      "pictures":["http://123.png","http://456.png"]
-  }
-  ```
+### exception
 
-- elif some picture upload fail
+#### 图片上传失败
 
-  ```json
-  {
-      "message": "No.2 pic fail"
-  }
-  ```
+```json
+{
+    "rescode": 3,
+    "badPicture": 2  // 第二张图片有问题
+}
+```
 
-- elif text and pics are null
+#### 文字和图片都为空
 
-  ```json
-  {
-      "message": "pics and text cannot all be null"
-  }
-  ```
+```json
+{
+    "rescode": 4
+}
+```
 
-- elif location wrong format
+#### 定位失败（地点格式错误）
 
-  ```json
-  {
-      "message": "wrong location format"
-  }
-  ```
+```json
+{
+    "rescode": 5
+}
+```
 
 ## 评论函/回复评论
 
@@ -206,48 +264,43 @@ request body:
 }
 ```
 
-response if ok:
+response body:
 
 ```json
 {
-    "message": "ok",
-    "comment": {
-    	"commentId": String,
-        "commenter": String,  //评论者username
-        "commented": String,  //被评论者username，如果直接评论函，这个字段是空
-        "time": Long,   //评论时间
-        "content" String  //评论内容
-     },
+    "rescode": 0
 }
 ```
 
-else:
+### exception
+
+#### 评论内容为空
 
 ```json
 {
-    "message":"error"
+    "rescode": 3
 }
 ```
 
 ## 根据hID删除该函
 
-`DELETE /hean/delete?hId=1` （需要认证）
+`DELETE /hean/delete?hId=1&uId=1` （需要认证）
 
 response body:
 
-+ if deleted successfully
+```json
+{
+    "rescode": 0
+}
+```
 
-  ```json
-  {
-      "message": "ok"
-  }
-  ```
+### exception
 
-+ otherwise
+#### 该用户不是该函的拥有者
 
-  ```json
-  {
-      "message": "not found"
-  }
-  ```
+```json
+{
+    "rescode": 3
+}
+```
 
