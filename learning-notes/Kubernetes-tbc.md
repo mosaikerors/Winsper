@@ -117,4 +117,30 @@
 
 8. 不出问题的话这个时候 k8s 的环境就已经搭建起来了，可以通过 `kubectl get node` 命令获得所有节点信息以确认搭建成功。
 
-##### Last-modified date: 2019.7.13, 11 a.m.
+## 在集群中操作
+
+### get
+
+`kubectl get ${resource}` 查看某类资源的简略信息
+
+resource 可以是 `pod`, `deploy`, `svc`
+
+添加 `-o wide` 选项已查看稍详细一点的信息
+
+### describe
+
+`kubectl describe ${resource}/${name}` 查看某个资源的详细信息
+
+### create
+
+`kubectl create -f ${filename}` 以 filename 文件为配置创建资源，一般是 .yml 文件
+
+### set
+
+`kubectl set image deploy/${name} ${image}=${newImage}` 用于更新 pod 版本
+
+### delete 
+
+`kubectl delete ${resource}/${name}` 删除某个资源
+
+##### Last-modified date: 2019.7.21, 6 p.m.
