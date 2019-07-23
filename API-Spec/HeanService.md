@@ -63,9 +63,7 @@ response body:
 
 场景：点击地图上的点或者浏览某个人的函时呈现出的简略形式
 
-`GET /hean/card?hId=1&uId=1` （需要认证）
-
-其中，uId 是正在浏览别人函的用户的 id
+`GET /hean/card?hId=1` （需要认证）
 
 response body:
 
@@ -154,15 +152,15 @@ request header 不同，request body 相同
 
 ### 根据uId查找用户所有历史函
 
-`GET /hean/card?owner=1&viewer=2` （需要认证）
+`GET /hean/card?owner=1` （需要认证）
 
-其中，owner 是被看的函的主人的 uId，viewer 是正在看函的人的 uId
+其中，owner 是被看的函的主人的 uId
 
 ### 根据uId查找用户收藏
 
-`GET /hean/collection?owner=1&viewer=2` （需要认证）
+`GET /hean/collection?owner=1` （需要认证）
 
-owner 和 viewer 的语义同上
+owner 的语义同上
 
 ### response body
 

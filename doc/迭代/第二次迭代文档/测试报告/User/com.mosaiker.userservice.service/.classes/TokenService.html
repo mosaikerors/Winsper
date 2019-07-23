@@ -1,0 +1,74 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TokenService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.mosaiker.userservice.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TokenService (com.mosaiker.userservice.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TokenService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.mosaiker.userservice.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.alibaba.fastjson.JSONObject;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public interface TokenService {
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    String createToken(Long uId, String role);
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    String createToken(Long uId, String role, Long expiration_time);
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    String createCodeToken(String phone, String code, Long expiration_time);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    String verifyCodeToken(String token, String phone, String code);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    JSONObject parseToken(String token, Long uId);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /*
+<i>20</i>&nbsp;    * 你可以大胆放心地使用这两个函数来认证
+<i>21</i>&nbsp;    * 并且你可以相信这两个函数不仅验证role，
+<i>22</i>&nbsp;    * 还验证uId和token匹不匹配
+<i>23</i>&nbsp;    * */
+<i>24</i>&nbsp;    boolean verifyTokenRoleIs(String token, Long uId, String role);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    boolean verifyTokenRoleHave(String token, Long uId, List&lt;String&gt; roleArray);
+<i>27</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-07-10 20:58</div>
+</div>
+</body>
+</html>
