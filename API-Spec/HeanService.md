@@ -31,14 +31,14 @@ Authorization: Bearer jwt.token.here
 
 ## 获取函的位置
 
-场景：进入地图页面需要在有函的位置上标点，有四个过滤选项
+场景：进入地图页面需要在有函的位置上标点，过滤选项
 
 + 只显示我关注的人的函：`follower=${uId}`
 + 只显示互相关注的人的函：`mutualFollow=${uId}`
 
 如果 url 后没有附带某个过滤选项，说明对该选项不做过滤，即全部显示。
 
-`GET /hean/point` （需要认证）
+`GET /hean/point/all？lat=0.1&lon=0.1` （需要认证）//全部显示只显示500m内
 
 response body:
 
