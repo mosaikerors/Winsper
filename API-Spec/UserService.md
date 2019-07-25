@@ -259,6 +259,38 @@ response body:
 }
 ```
 
+## 取关
+
+`POST /user/unfollow` （需要认证）
+
+request body:
+
+```json
+{
+    "targetUId": 3   // 要取关谁
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
+### exception
+
+#### 未曾关注此人
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ## 查看个人信息
 
 场景：用户每次进入个人信息页面，会向后端请求一次最新的数据
@@ -298,28 +330,22 @@ response body:
     "mutualFollow": Integer,    
     "following": Integer,    
     "followers": Integer,   
-	"isMessagePublic": bool,
     "isHeanPublic": bool,
     "isCollectionPublic": bool,
     "isDiaryPublic": bool,
     "isJournalPublic": bool,
     "isSubmissionPublic": bool,
-    "isMoodReportPublic": bool,
     "isCommentPublic": bool,
 }
 ```
 
 ## 隐私设置
 
-可以设置消息、函、收藏、日记、手账、投稿、心情报表以及评论对于他人是否可见
+可以设置消息、函、收藏、日记、手账、投稿以及评论对于他人是否可见
 
 在这里设置的函的可见度控制的是当别人进入你的主页时是否可以查看全部的函，而在地图上显示的函是一直公开的。
 
-这八个 api 只有 url 不同，request body 和 response body 相同
-
-### 消息
-
-`PUT /user/privacy/message` （需要认证）
+这七个 api 只有 url 不同，request body 和 response body 相同
 
 ### 函
 
