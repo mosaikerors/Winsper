@@ -1,7 +1,5 @@
 # User-Service API
 #### port:7120
-**注意，中文可能返回的是乱码!!!**
-
 ## 认证
 
 在 request header 里加上 `uId`, `token` 两个字段：
@@ -110,6 +108,14 @@ response body:
 }
 ```
 
+#### 验证码已过期
+
+```json
+{
+    "rescode": 5
+}
+```
+
 ## 登录
 
 > 根据 requestBody 中是否含有 token 字段来判定是否第一次登录
@@ -199,6 +205,8 @@ response body:
 ## 更新头像
 
 `PUT /user/update/avatar` （需要认证）
+
+存在云存储桶
 
 request body:
 

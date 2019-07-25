@@ -38,7 +38,9 @@ Authorization: Bearer jwt.token.here
 
 如果 url 后没有附带某个过滤选项，说明对该选项不做过滤，即全部显示。
 
-`GET /hean/point/all？lat=0.1&lon=0.1` （需要认证）//全部显示只显示500m内
+显示九宫格内的函
+
+`GET /hean/point/all?latitude=0.1&longitude=0.1` （需要认证）
 
 response body:
 
@@ -48,7 +50,7 @@ response body:
     "heans": [
         {
             "hId": String,
-            "longtitude": Double,
+            "longitude": Double,
             "latitude": Double,
             "height": Double
         },
@@ -59,15 +61,13 @@ response body:
 
 ## 获取卡片形式的函
 
-场景：点击地图上的点或者浏览某个人的函时呈现出的简略形式
+场景：点击地图上的点显示卡片形式的函
 
-`GET /hean/card?hId=1&uId=1` （需要认证）
+`GET /hean/card?hId=1` （需要认证）
 
-其中，uId 是正在浏览别人函的用户的 id
+response body:
 
-response body:json
-
-```
+```json
 {
     "rescode": 0,
     "heanCard": {
@@ -93,50 +93,6 @@ response body:json
 }
 ```
 
-## 获取函的具体内容
-
-场景：点击卡片形式的函后呈现的内容
-
-`GET /hean/detailed?hId=1&uId=1&lon=1&lat=1` （需要认证）
-
-response body:json
-
-```
-{
-    "rescode": 0,
-    "hean": {
-        "hId": String,
-        "uId": Long,
-        "avatar": url,
-        "username": String,
-        "createdTime": Long,
-        "pics": [
-            url1, url2, url3, url4   //可以有0~4张
-        ],
-        "comments": [
-            {
-                "commentId": String,
-            	"commenter": String,  //评论者username
-                "commented": String,  //被评论者username，如果直接评论函，这个字段是空
-                "time": Long,   //评论时间
-                "content" String  //评论内容
-            },
-            ...   //可以有多条评论
-        ]
-    }
-}
-```
-
-### exception
-
-#### 该函对于该用户位置不够近
-
-```json
-{
-    "rescode": 3
-}
-```
-
 ## 浏览卡片形式的函list
 
 场景：根据uId查找用户所有历史函，根据uId查找用户收藏
@@ -145,15 +101,15 @@ request header 不同，request body 相同
 
 ### 根据uId查找用户所有历史函
 
-`GET /hean/cardlist?owner=1&viewer=2` （需要认证）// xyx
+`GET /hean/cardlist?owner=1` （需要认证）
 
-其中，owner 是被看的函的主人的 uId，viewer 是正在看函的人的 uId
+其中，owner 是被看的函的主人的 uId
 
 ### 根据uId查找用户收藏
 
-`GET /hean/collection?owner=1&viewer=2` （需要认证）
+`GET /hean/collection?owner=1` （需要认证）
 
-owner 和 viewer 的语义同上
+owner 的语义同上
 
 ### response body
 
@@ -168,8 +124,8 @@ owner 和 viewer 的语义同上
         	"likeCount": Integer,   //点赞数
         	"starCount": Integer,   //收藏数
         	"commentCount": Integer,  //评论数
-          "hasLiked": Boolean,
-          "hasStared": Boolean
+            "hasLiked": Boolean,
+            "hasStared": Boolean
     	},
         ...  
     ]
@@ -194,22 +150,69 @@ owner 和 viewer 的语义同上
 }
 ```
 
+## 获取函的具体内容
+
+场景：点击卡片形式的函后呈现的内容
+
+`GET /hean/detailed?hId=1&longitude=1&latitude=1` （需要认证）
+
+response body
+
+```json
+{
+    "rescode": 0,
+    "hean": {
+        "hId": String,
+        "uId": Long,  // 函的作者
+        "avatar": url,
+        "username": String,
+        "createdTime": Long,
+        "pictures": [
+            url1, url2, url3, url4   //可以有0~4张
+        ],
+        "comments": [
+            {
+                "commentId": String,
+            	"commenter": String,  //评论者username
+                "commented": String,  //被评论者username，如果直接评论函，这个字段是空
+                "time": Long,   //评论时间
+                "content" String  //评论内容
+            },
+            ...   //可以有多条评论
+        ]
+    }
+}
+```
+
+### exception
+
+#### 该函对于该用户位置不够近
+
+暂定 100m
+
+```json
+{
+    "rescode": 3
+}
+```
+
 ## 新建函
 
 `POST /hean/upload` （需要认证）
 
 request :  (**form-data**)
 
-```
-"uId": Long
+pictures 和 text 至少有一个，location 必须
+
+```json
 "pictures": MultipartFile[]
 "text": String
 "location": String  (example: "23.456,40.123,12.22")
 ```
 
-response body:json
+response body:
 
-```
+```json
 {
     "rescode": 0
 }
@@ -217,26 +220,26 @@ response body:json
 
 ### exception
 
-#### 图片上传失败:json
+#### 图片上传失败
 
-```
+```json
 {
     "rescode": 3,
     "badPicture": 2  // 第二张图片有问题
 }
 ```
 
-#### 文字和图片都为空:json
+#### 文字和图片都为空
 
-```
+```json
 {
     "rescode": 4
 }
 ```
 
-#### 定位失败（地点格式错误）:json
+#### 定位失败（地点格式错误）
 
-```
+```json
 {
     "rescode": 5
 }
@@ -246,20 +249,19 @@ response body:json
 
 `POST /hean/comment/add` （需要认证）
 
-request body:json
+request body
 
-```
+```json
 {
-    "uId": Long,
     "hId": String,
     "targetCommentId": String,   //为空：评论的是函，否则评论的是评论
-    "content" String  //评论内容
+    "content": String  //评论内容
 }
 ```
 
-response body:json
+response body:
 
-```
+```json
 {
     "rescode": 0
 }
@@ -267,9 +269,9 @@ response body:json
 
 ### exception
 
-#### 评论内容为空:json
+#### 评论内容为空
 
-```
+```json
 {
     "rescode": 3
 }
@@ -277,11 +279,11 @@ response body:json
 
 ## 根据hID删除该函
 
-`DELETE /hean/delete?hId=1&uId=1` （需要认证）
+`DELETE /hean/delete?hId=1` （需要认证）
 
-response body:json
+response body:
 
-```
+```json
 {
     "rescode": 0
 }
@@ -289,9 +291,9 @@ response body:json
 
 ### exception
 
-#### 该用户不是该函的拥有者:json
+#### 该用户不是该函的拥有者
 
-```
+```json
 {
     "rescode": 3
 }
