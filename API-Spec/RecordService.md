@@ -2,8 +2,6 @@
 
 #### port:7120
 
-**注意，中文可能返回的是乱码!!!**
-
 ## 认证
 
 在 request header 里加上 `uId`, `token` 两个字段：
@@ -63,9 +61,9 @@ response body:
 
 ## 获取某个手账本中的所有手账
 
-`GET /record/journal?id=12` （需要认证）
+`GET /record/journal?journalBookId=12` （需要认证）
 
-其中，id 是某个手账本的 id
+其中，journalBookId是某个手账本的 id
 
 response body:
 
