@@ -75,7 +75,7 @@ response body:
         "cover": url,
         "text": String,
         "hasLiked": bool,   //是否点过赞
-        "hasStared": bool,   //是否已收藏
+        "hasStarred": bool,   //是否已收藏
         "likeCount": Integer,   //点赞数
         "starCount": Integer,   //收藏数
         "commentCount": Integer,  //评论数
