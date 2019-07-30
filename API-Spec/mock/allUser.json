@@ -1,0 +1,21 @@
+{
+    "rescode":0,
+    "data":[ { "heanNum": 0,
+        "reportNum": 0,
+        "dairyNum": 0,
+        "journelNum": 0,
+        "fans": 0,
+        "idle": 0,
+        "uId": 0,
+        "phone": "10086",
+        "username": "user0" },
+      { "heanNum": 10,
+        "reportNum": 9,
+        "dairyNum": 8,
+        "journelNum": 9,
+        "fans": 7,
+        "idle": 6,
+        "uId": 1,
+        "phone": "10086",
+        "username": "user1" } ]
+}
