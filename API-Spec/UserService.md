@@ -152,15 +152,7 @@ response body:
 {
     "rescode": 0,
     "token": String,
-    "uId": Long,
-    "username": String,
-    "status": Integer,
-    "feather": Integer,    
-    "mutualFollow": Integer,    
-    "following": Integer,    
-    "followers": Integer,   
-    "hasChecked": Bool,      
-    "avater": url       
+    "uId": Long    
 }
 ```
 
@@ -182,9 +174,59 @@ response body:
 }
 ```
 
+## 查看个人信息
+
+场景：用户每次进入个人信息页面，会向后端请求一次最新的数据
+
+`GET /user/info/me` （需要认证）
+
+response body:
+
+```json
+{
+    "rescode": 0,
+    "avater": url,
+    "username": String,
+    "status": Integer,
+    "feather": Integer,    
+    "mutualFollow": Integer,    
+    "following": Integer,    
+    "followers": Integer,   
+    "hasChecked": Bool,      
+}
+```
+
+## 查看他人信息
+
+场景：用户进入他人主页，会向后端请求一次最新的数据
+
+`GET /user/info?uId=4` （需要认证）
+
+response body:
+
+```json
+{
+    "rescode": 0,      
+    "avater": url,
+    "username": String,
+    "feather": Integer,    
+    "mutualFollow": Integer,    
+    "following": Integer,    
+    "followers": Integer,
+    "isMessagePublic": bool,
+    "isHeanPublic": bool,
+    "isCollectionPublic": bool,
+    "isDiaryPublic": bool,
+    "isJournalPublic": bool,
+    "isSubmissionPublic": bool,
+    "isMoodReportPublic": bool,
+    "isCommentPublic": bool,
+}
+```
+
 ## 更新用户名
 
-`PUT /user/update/username` （需要认证）
+`PUT /user/username/update` （需要认证）
 
 request body:
 
@@ -204,7 +246,7 @@ response body:
 
 ## 更新头像
 
-`PUT /user/update/avatar` （需要认证）
+`PUT /user/avatar/update` （需要认证）
 
 存在云存储桶
 
@@ -297,53 +339,38 @@ response body:
 }
 ~~~
 
+## 获取关注列表
 
+有三种关注列表，分别是互相关注、我的关注和我的粉丝（需要认证）
 
-## 查看个人信息
+三种请求只有 url 不同
 
-场景：用户每次进入个人信息页面，会向后端请求一次最新的数据
+### 互相关注
 
-`GET /user/info/me` （需要认证）
+`GET /user/followlist/mutual`
 
-response body:
+### 我的关注
+
+`GET /user/followlist/followings`
+
+### 我的粉丝
+
+`GET /user/followlist/followers`
+
+### response body
 
 ```json
 {
     "rescode": 0,
-    "avater": url,
-    "username": String,
-    "status": Integer,
-    "feather": Integer,    
-    "mutualFollow": Integer,    
-    "following": Integer,    
-    "followers": Integer,   
-    "hasChecked": Bool,      
-}
-```
-
-## 查看他人信息
-
-场景：用户进入他人主页，会向后端请求一次最新的数据
-
-`GET /user/info?uId=4` （需要认证）
-
-response body:
-
-```json
-{
-    "rescode": 0,      
-    "avater": url,
-    "username": String,
-    "feather": Integer,    
-    "mutualFollow": Integer,    
-    "following": Integer,    
-    "followers": Integer,   
-    "isHeanPublic": bool,
-    "isCollectionPublic": bool,
-    "isDiaryPublic": bool,
-    "isJournalPublic": bool,
-    "isSubmissionPublic": bool,
-    "isCommentPublic": bool,
+    "followlist": [
+        {
+            "uId": 1,
+            "username": String,
+            "avatar": url,
+            "isMutualFollow": bool  // 是否为互相关注（即使请求的是互相关注，也要有此字段）
+        },
+        ... // 多个用户
+    ]
 }
 ```
 
@@ -398,6 +425,3 @@ response body:
     "rescode": 0
 }
 ```
-
-
-
