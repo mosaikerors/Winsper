@@ -1,6 +1,5 @@
 # Hean-Service API
-#### port:7120
-**注意，中文可能返回的是乱码!!!**
+包括函、评论、收藏
 
 ## 认证
 
@@ -31,16 +30,22 @@ Authorization: Bearer jwt.token.here
 
 ## 获取函的位置
 
-场景：进入地图页面需要在有函的位置上标点，过滤选项
-
-+ 只显示我关注的人的函：`follower=${uId}`
-+ 只显示互相关注的人的函：`mutualFollow=${uId}`
-
-如果 url 后没有附带某个过滤选项，说明对该选项不做过滤，即全部显示。
+场景：进入地图页面需要在有函的位置上标点。
 
 显示九宫格内的函
 
-`GET /hean/point/all?latitude=0.1&longitude=0.1` （需要认证）
+`GET /hean/point/all?longitude=0.1&latitude=0.1&follower=me&time=week` （需要认证）
+
+其中，longitude 和 latitude 为经纬度，follower 和 time 为过滤选项
+
++ `follower=me` 显示我关注的人的函
++ `follower=mutual` 显示互相关注的人的函
++ `follower=all` 显示全部的函
++ `time=day` 显示一天以内的函
++ `time=week` 显示一周一内的函
++ `time=month` 显示一个月以内的函
++ `time=year` 显示一年以内的函
++ `time=all` 显示全部的函
 
 response body:
 
@@ -134,7 +139,7 @@ owner 的语义同上
 
 ### exception
 
-#### 该函或收藏对于该用户不可见:json
+#### 该函或收藏对于该用户不可见
 
 ```
 {
@@ -142,7 +147,7 @@ owner 的语义同上
 }
 ```
 
-#### 该用户没有函或收藏:json
+#### 该用户没有函或收藏
 
 ```
 {
@@ -245,11 +250,53 @@ response body:
 }
 ```
 
+## 删除函
+
+`DELETE /hean/delete?hId=1` （需要认证）
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
+### exception
+
+#### 该用户不是该函的拥有者
+
+```json
+{
+    "rescode": 3
+}
+```
+
+## 点赞函
+
+`POST /hean/like` （需要认证）
+
+request body:
+
+```json
+{
+    "hId": String
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
 ## 评论函/回复评论
 
 `POST /hean/comment/add` （需要认证）
 
-request body
+request body:
 
 ```json
 {
@@ -277,11 +324,53 @@ response body:
 }
 ```
 
-## 根据hID删除该函
+## 获取某用户的所有评论
 
-`DELETE /hean/delete?hId=1` （需要认证）
+`GET /hean/comment?owner=1` （需要认证）
+
+其中，owner 是评论的拥有者
 
 response body:
+
+```json
+{
+    "rescode": 0,
+    "comments": [
+        {
+            "isComment": Bool,  // 为true表示是评论，为false表示是回复
+            // 如果是评论，此字段为函的主人的username，
+            // 如果是回复，此字段为被回复者的username
+            "username": String,  
+            "content": String,  // 评论/回复的内容
+            "time": Long,
+            "hId": String   // 评论/回复发生的函
+        },
+        ...  // 会有很多评论
+    ]
+}
+```
+
+## 收藏/取消收藏函
+
+只有 method 不同
+
+### 收藏
+
+`POST /hean/collection` （需要认证）
+
+### 取消收藏
+
+`DELETE /hean/collection` （需要认证）
+
+### request body
+
+```json
+{
+    "hId": String
+}
+```
+
+### response body
 
 ```json
 {
@@ -289,12 +378,3 @@ response body:
 }
 ```
 
-### exception
-
-#### 该用户不是该函的拥有者
-
-```json
-{
-    "rescode": 3
-}
-```
