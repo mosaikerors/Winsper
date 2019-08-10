@@ -115,6 +115,8 @@
    ansible-playbook -i inventory/local/hosts.ini --become --become-user=root cluster.yml
    ```
 
+   这里可能会有 master 不能 ssh 自己的问题，把 master 的公钥加到自己的 `authorized_keys` 就解决了。
+
 8. 不出问题的话这个时候 k8s 的环境就已经搭建起来了，可以通过 `kubectl get node` 命令获得所有节点信息以确认搭建成功。
 
 ## 在集群中操作
@@ -143,4 +145,4 @@ resource 可以是 `pod`, `deploy`, `svc`
 
 `kubectl delete ${resource}/${name}` 删除某个资源
 
-##### Last-modified date: 2019.7.21, 6 p.m.
+##### Last-modified date: 2019.8.5, 2 p.m.

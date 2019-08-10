@@ -192,7 +192,7 @@ response body:
     "mutualFollow": Integer,    
     "following": Integer,    
     "followers": Integer,   
-    "hasChecked": Bool,      
+    "hasChecked": Bool,      // 是否已经签到
 }
 ```
 
@@ -206,14 +206,13 @@ response body:
 
 ```json
 {
-    "rescode": 0,      
+    "rescode": 0, 
     "avater": url,
     "username": String,
     "feather": Integer,    
     "mutualFollow": Integer,    
     "following": Integer,    
     "followers": Integer,
-    "isMessagePublic": bool,
     "isHeanPublic": bool,
     "isCollectionPublic": bool,
     "isDiaryPublic": bool,
@@ -221,6 +220,7 @@ response body:
     "isSubmissionPublic": bool,
     "isMoodReportPublic": bool,
     "isCommentPublic": bool,
+    "hasFollowed": bool  // 是否已关注该用户
 }
 ```
 
@@ -268,7 +268,7 @@ response body:
 
 ## 签到
 
-`POST /user/check` （需要认证）
+`PUT /user/check` （需要认证）
 
 response body:
 
@@ -289,11 +289,19 @@ response body:
 }
 ```
 
-## 关注
+## 关注 / 取关
+
+只有 url 不同
+
+### 关注
 
 `POST /user/follow` （需要认证）
 
-request body:
+### 取关
+
+`POST /user/unfollow` （需要认证）
+
+### request body
 
 ```json
 {
@@ -301,43 +309,13 @@ request body:
 }
 ```
 
-response body:
+### response body
 
 ```json
 {
     "rescode": 0
 }
 ```
-
-## 取关
-
-`POST /user/unfollow` （需要认证）
-
-request body:
-
-```json
-{
-    "targetUId": 3   // 要取关谁
-}
-```
-
-response body:
-
-```json
-{
-    "rescode": 0
-}
-```
-
-### exception
-
-#### 未曾关注此人
-
-~~~json
-{
-    "rescode": 3
-}
-~~~
 
 ## 获取关注列表
 
@@ -376,7 +354,7 @@ response body:
 
 ## 隐私设置
 
-可以设置消息、函、收藏、日记、手账、投稿以及评论对于他人是否可见
+可以设置函、收藏、日记、手账、投稿、评论以及心情报表对于他人是否可见
 
 在这里设置的函的可见度控制的是当别人进入你的主页时是否可以查看全部的函，而在地图上显示的函是一直公开的。
 

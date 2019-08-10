@@ -179,9 +179,10 @@ response body
             {
                 "commentId": String,
             	"commenter": String,  //评论者username
+                "commenterAvatar": Url,  //评论者头像
                 "commented": String,  //被评论者username，如果直接评论函，这个字段是空
                 "time": Long,   //评论时间
-                "content" String  //评论内容
+                "content": String  //评论内容
             },
             ...   //可以有多条评论
         ]
@@ -272,11 +273,19 @@ response body:
 }
 ```
 
-## 点赞函
+## 点赞 / 取消点赞函
+
+只有 url 不同
+
+### 点赞
 
 `POST /hean/like` （需要认证）
 
-request body:
+### 取消点赞
+
+`POST /hean/dislike` （需要认证）
+
+### request body
 
 ```json
 {
@@ -284,7 +293,7 @@ request body:
 }
 ```
 
-response body:
+### response body
 
 ```json
 {
@@ -292,7 +301,7 @@ response body:
 }
 ```
 
-## 评论函/回复评论
+## 评论函 / 回复评论
 
 `POST /hean/comment/add` （需要认证）
 
@@ -350,17 +359,17 @@ response body:
 }
 ```
 
-## 收藏/取消收藏函
+## 收藏 / 取消收藏函
 
-只有 method 不同
+只有 url 不同
 
 ### 收藏
 
-`POST /hean/collection` （需要认证）
+`POST /hean/collect` （需要认证）
 
 ### 取消收藏
 
-`DELETE /hean/collection` （需要认证）
+`POST /hean/uncollect` （需要认证）
 
 ### request body
 
