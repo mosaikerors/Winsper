@@ -1,5 +1,5 @@
 # Hean-Service API
-包括函、评论、收藏
+包括函、评论、收藏、投稿
 
 ## 认证
 
@@ -88,16 +88,6 @@ response body:
 }
 ```
 
-### exception
-
-#### 该函对于该用户不可见
-
-```json
-{
-    "rescode": 3
-}
-```
-
 ## 浏览卡片形式的函list
 
 场景：根据uId查找用户所有历史函，根据uId查找用户收藏
@@ -137,29 +127,11 @@ owner 的语义同上
 }
 ```
 
-### exception
-
-#### 该函或收藏对于该用户不可见
-
-```
-{
-    "rescode": 3
-}
-```
-
-#### 该用户没有函或收藏
-
-```
-{
-    "rescode": 4
-}
-```
-
 ## 获取函的具体内容
 
 场景：点击卡片形式的函后呈现的内容
 
-`GET /hean/detailed?hId=1&longitude=1&latitude=1` （需要认证）
+`GET /hean/detailed?hId=1` （需要认证）
 
 response body
 
@@ -187,18 +159,6 @@ response body
             ...   //可以有多条评论
         ]
     }
-}
-```
-
-### exception
-
-#### 该函对于该用户位置不够近
-
-暂定 100m
-
-```json
-{
-    "rescode": 3
 }
 ```
 
@@ -260,16 +220,6 @@ response body:
 ```json
 {
     "rescode": 0
-}
-```
-
-### exception
-
-#### 该用户不是该函的拥有者
-
-```json
-{
-    "rescode": 3
 }
 ```
 
@@ -384,6 +334,60 @@ response body:
 ```json
 {
     "rescode": 0
+}
+```
+
+## 获取投稿 list
+
+有两个场景，一个是获取所有被选中的投稿，还有一个是获取某个用户的所有投稿，只有 url 不同，返回的都是 heanCard 类型的数组。
+
+### 获取所有被选中的投稿
+
+`GET /hean/submission/selected` （需要认证）
+
+### 获取某用户的所有投稿
+
+`GET /hean/submisstion/list?owner=2` （需要认证）
+
+### response body
+
+```json
+{
+    "rescode": 0,
+    "heanCards": [
+    	{
+        	"hId": String,
+        	"cover": url,
+        	"text": String,
+        	"likeCount": Integer,   //点赞数
+        	"starCount": Integer,   //收藏数
+        	"commentCount": Integer,  //评论数
+            "hasLiked": Boolean,
+            "hasStared": Boolean
+    	},
+        ...  
+    ]
+}
+```
+
+## 投稿
+
+`POST /hean/submission` （需要认证）
+
+request body:
+
+```json
+{
+	"hId": String,
+    "reason": String  // 投稿理由
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0  // 等待审核
 }
 ```
 

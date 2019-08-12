@@ -1,5 +1,4 @@
 # User-Service API
-#### port:7120
 ## 认证
 
 在 request header 里加上 `uId`, `token` 两个字段：
@@ -255,6 +254,86 @@ request body:
 ```json
 {
     "avatar": url
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
+## 修改密码
+
+`PUT /user/password/update` （需要认证）
+
+request body:
+
+```json
+{
+    "password": String
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
+## 忘记密码
+
+两个接口，一个获取验证码，一个修改密码。
+
+获取验证码因为该手机号已注册过，所以不能用之前的接口。
+
+### 获取验证码
+
+`POST /user/forget/sendCode` （不需要认证）
+
+request body:
+
+```json
+{
+    "phone": String
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0,
+    "token": String  //用 code 加密 phone
+}
+```
+
+#### exception
+
+##### 发送验证码失败
+
+```json
+{
+    "rescode": 3
+}
+```
+
+### 修改密码
+
+`POST /user/forget/update` （不需要认证）
+
+request body:
+
+```json
+{
+    "token": String,
+    "phone": String,
+    "code": String,
+    "password": String
 }
 ```
 
