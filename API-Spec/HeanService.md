@@ -162,6 +162,18 @@ response body
 }
 ```
 
+except:
+
+函不存在
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ## 新建函
 
 `POST /hean/upload` （需要认证）
