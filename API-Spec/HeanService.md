@@ -88,17 +88,15 @@ response body:
 }
 ```
 
-##### except
+### exception
 
-##### 该hean已被删除
+#### 该hean已被删除
 
 ~~~json
 {
     "rescode": 3
 }
 ~~~
-
-
 
 ## 浏览卡片形式的函list
 
@@ -139,17 +137,15 @@ owner 的语义同上
 }
 ```
 
-##### except
+### exception
 
-##### 主人不给你看
+#### 主人不给你看
 
 ~~~json
 {
     "rescode": 3
 }
 ~~~
-
-
 
 ## 获取函的具体内容
 
@@ -186,17 +182,15 @@ response body
 }
 ```
 
-##### except:
+### exception
 
-##### 函不存在
+#### 函不存在
 
 ~~~json
 {
     "rescode": 3
 }
 ~~~
-
-
 
 ## 新建函
 
@@ -259,17 +253,15 @@ response body:
 }
 ```
 
-##### except
+### exception
 
-##### 函不是你的
+#### 函不是你的
 
 ~~~json
 {
     "rescode": 3
 }
 ~~~
-
-
 
 ## 点赞 / 取消点赞函
 
