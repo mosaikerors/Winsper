@@ -103,6 +103,39 @@ response body:
 }
 ```
 
+## 新建手账本
+
+`POST /record/journal/books` （需要认证）
+
+request body:
+
+```json
+{
+    "name": String,
+    "coverId": Integer
+}
+```
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
+## 删除手账本
+
+`DELETE /record/journal/books?journalBookId=1` （需要认证）
+
+response body:
+
+```json
+{
+    "rescode": 0
+}
+```
+
 ## 发送消息
 
 消息分为五种，如下：
