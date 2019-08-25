@@ -314,11 +314,21 @@ response body:
 
 #### exception
 
+##### 该手机号未注册
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ##### 发送验证码失败
 
 ```json
 {
-    "rescode": 3
+    "rescode": 4
 }
 ```
 

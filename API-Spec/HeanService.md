@@ -88,6 +88,18 @@ response body:
 }
 ```
 
+##### except
+
+##### 该hean已被删除
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ## 浏览卡片形式的函list
 
 场景：根据uId查找用户所有历史函，根据uId查找用户收藏
@@ -127,6 +139,18 @@ owner 的语义同上
 }
 ```
 
+##### except
+
+##### 主人不给你看
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ## 获取函的具体内容
 
 场景：点击卡片形式的函后呈现的内容
@@ -162,9 +186,9 @@ response body
 }
 ```
 
-except:
+##### except:
 
-函不存在
+##### 函不存在
 
 ~~~json
 {
@@ -235,6 +259,18 @@ response body:
 }
 ```
 
+##### except
+
+##### 函不是你的
+
+~~~json
+{
+    "rescode": 3
+}
+~~~
+
+
+
 ## 点赞 / 取消点赞函
 
 只有 url 不同
@@ -272,7 +308,7 @@ request body:
 ```json
 {
     "hId": String,
-    "targetCommentId": String,   //为空：评论的是函，否则评论的是评论
+    "targetCommentId": String,   //为空(指的是不含此字段)：评论的是函，否则评论的是评论
     "content": String  //评论内容
 }
 ```
@@ -355,7 +391,7 @@ response body:
 
 ### 获取所有被选中的投稿
 
-`GET /hean/submission/selected` （需要认证）
+`GET /hean/submission/selected?date=123456` （需要认证）
 
 ### 获取某用户的所有投稿
 
