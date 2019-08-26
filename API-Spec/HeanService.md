@@ -170,9 +170,11 @@ response body
         "comments": [
             {
                 "commentId": String,
-            	"commenter": String,  //评论者username
+                "commenterUId": Integer,  //评论者id
+            	"commenterUsername": String,  //评论者username
                 "commenterAvatar": Url,  //评论者头像
-                "commented": String,  //被评论者username，如果直接评论函，这个字段是空
+                "commentedUId": Integer,  //被评论者id，如果直接评论函，这个字段是空
+                "commentedUsername": String,  //被评论者username，如果直接评论函，这个字段是空
                 "time": Long,   //评论时间
                 "content": String  //评论内容
             },

@@ -93,7 +93,7 @@ response body:
 
 ## 删除手账
 
-`DELETE /record/journal?journalId=1` （需要认证）
+`DELETE /record/journal?journalBookId=1&journalId=1` （需要认证）
 
 response body:
 
