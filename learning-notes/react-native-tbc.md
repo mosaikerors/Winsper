@@ -96,4 +96,13 @@
   )  //make sure geolocation won't get timeout
   ```
 
-##### Last-modified date: 2019.7.16, 10 a.m.
++ > 对于网络和 base64 数据的图片需要手动指定尺寸！
+  >
+  > ```react
+  > <Image
+  >     style={{width: 66, height: 58}}
+  >     source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+  > />
+  > ```
+
+##### Last-modified date: 2019.8.26, 7 a.m.
