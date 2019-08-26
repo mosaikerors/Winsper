@@ -281,7 +281,8 @@ response body:
 
 ```json
 {
-    "rescode": 0
+    "rescode": 0,
+    "token": String
 }
 ```
 
@@ -349,7 +350,8 @@ response body:
 
 ```json
 {
-    "rescode": 0
+    "rescode": 0,
+    "token": String
 }
 ```
 
