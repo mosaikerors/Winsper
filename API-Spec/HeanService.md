@@ -205,7 +205,7 @@ pictures 和 text 至少有一个，location 必须
 ```json
 "pictures": MultipartFile[]
 "text": String
-"location": String  (example: "23.456,40.123,12.22")
+"location": String  (example: "23.456,40.123,12.22")  // longitude, latitude, height
 ```
 
 response body:
@@ -293,7 +293,7 @@ response body:
 }
 ```
 
-## 评论函 / 回复评论
+## 评论函
 
 `POST /hean/comment/add` （需要认证）
 
@@ -302,7 +302,6 @@ request body:
 ```json
 {
     "hId": String,
-    "targetCommentId": String,   //为空(指的是不含此字段)：评论的是函，否则评论的是评论
     "content": String  //评论内容
 }
 ```
@@ -338,13 +337,10 @@ response body:
     "rescode": 0,
     "comments": [
         {
-            "isComment": Bool,  // 为true表示是评论，为false表示是回复
-            // 如果是评论，此字段为函的主人的username，
-            // 如果是回复，此字段为被回复者的username
             "username": String,  
-            "content": String,  // 评论/回复的内容
+            "content": String,  // 评论的内容
             "time": Long,
-            "hId": String   // 评论/回复发生的函
+            "hId": String   // 评论发生的函
         },
         ...  // 会有很多评论
     ]
