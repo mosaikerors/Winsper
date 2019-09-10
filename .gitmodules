@@ -7,9 +7,6 @@
 [submodule "Winsper-FrontEnd"]
 	path = Winsper-FrontEnd
 	url = https://github.com/mosaikerors/Winsper-FrontEnd
-[submodule "Winsper-Consumer"]
-	path = Winsper-Consumer
-	url = git@github.com:mosaikerors/Winsper-Consumer.git
 [submodule "Winsper-HeanService"]
 	path = Winsper-HeanService
 	url = git@github.com:mosaikerors/Winsper-HeanService.git
@@ -19,3 +16,12 @@
 [submodule "Winsper-Zuul"]
 	path = Winsper-Zuul
 	url = git@github.com:mosaikerors/Winsper-Zuul.git
+[submodule "Winsper-RecordService"]
+	path = Winsper-RecordService
+	url = https://github.com/mosaikerors/Winsper-RecordService
+[submodule "Winsper-Config"]
+	path = Winsper-Config
+	url = https://github.com/mosaikerors/Winsper-Config
+[submodule "Winsper-Web"]
+	path = Winsper-Web
+	url = https://github.com/mosaikerors/Winsper-Web
