@@ -6,10 +6,6 @@
 
 一款专注于记录心情、分享生活的校园社交APP
 
-<div>
-    <img src="./doc/images/gif1.gif" width="32%" />
-    <img src="./doc/images/gif2.gif" width="32%" />
-</div>
 
 ## 如何安装
 
