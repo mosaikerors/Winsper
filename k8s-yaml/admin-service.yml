@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-admin
+  namespace: default
+  labels:
+    name: winsper-admin
+spec:
+  selector:
+    name: winsper-admin
+  ports:
+  - name: winsper-admin
+    port: 7170
+    targetPort: 7170

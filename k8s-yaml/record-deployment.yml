@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-record
+  namespace: default
+  labels:
+    name: winsper-record
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: winsper-record
+  template:
+    metadata:
+      labels:
+        name: winsper-record
+    spec:
+      containers:
+        - name: winsper-record
+          image: gusabary/winsper-record
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-record
+              containerPort: 7160

@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-eureka
+  namespace: default
+  labels:
+    name: winsper-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: winsper-eureka
+  template:
+    metadata:
+      labels:
+        name: winsper-eureka
+    spec:
+      containers:
+        - name: winsper-eureka
+          image: gusabary/winsper-eureka
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-eureka
+              containerPort: 7100

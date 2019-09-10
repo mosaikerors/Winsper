@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-mongo
+  namespace: default
+  labels:
+    name: winsper-mongo
+spec:
+  selector:
+    name: winsper-mongo
+  type: NodePort
+  ports:
+  - name: mongo
+    port: 27017
+    targetPort: 27017
+    nodePort: 30524

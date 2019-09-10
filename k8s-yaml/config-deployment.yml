@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-config
+  namespace: default
+  labels:
+    name: winsper-config
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: winsper-config
+  template:
+    metadata:
+      labels:
+        name: winsper-config
+    spec:
+      containers:
+        - name: winsper-config
+          image: gusabary/winsper-config
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-config
+              containerPort: 7210

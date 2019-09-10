@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-record
+  namespace: default
+  labels:
+    name: winsper-record
+spec:
+  selector:
+    name: winsper-record
+  ports:
+  - name: winsper-record
+    port: 7160
+    targetPort: 7160

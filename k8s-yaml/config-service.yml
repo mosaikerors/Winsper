@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-config
+  namespace: default
+  labels:
+    name: winsper-config
+spec:
+  selector:
+    name: winsper-config
+  ports:
+  - name: winsper-config
+    port: 7210
+    targetPort: 7210

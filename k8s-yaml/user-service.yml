@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-user
+  namespace: default
+  labels:
+    name: winsper-user
+spec:
+  selector:
+    name: winsper-user
+  type: NodePort
+  ports:
+  - name: winsper-user
+    port: 7180
+    targetPort: 7180
+    nodePort: 30528

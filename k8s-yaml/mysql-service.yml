@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-mysql
+  namespace: default
+  labels:
+    name: winsper-mysql
+spec:
+  selector:
+    name: winsper-mysql
+  type: NodePort
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+    nodePort: 30523

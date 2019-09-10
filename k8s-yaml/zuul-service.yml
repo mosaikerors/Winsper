@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-zuul
+  namespace: default
+  labels:
+    name: winsper-zuul
+spec:
+  selector:
+    name: winsper-zuul
+  type: NodePort
+  ports:
+  - name: winsper-zuul
+    port: 30525
+    targetPort: 30525
+    nodePort: 30525

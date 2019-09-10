@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-hean
+  namespace: default
+  labels:
+    name: winsper-hean
+spec:
+  selector:
+    name: winsper-hean
+  ports:
+  - name: winsper-hean
+    port: 7190
+    targetPort: 7190

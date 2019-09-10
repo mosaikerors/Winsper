@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-mongo
+  namespace: default
+  labels:
+    name: winsper-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: winsper-mongo
+  template:
+    metadata:
+      labels:
+        name: winsper-mongo
+    spec:
+      volumes:
+        - name: mongo-volume
+          nfs:
+            server: 10.0.0.41
+            path: /data/mongo
+      containers:
+        - name: winsper-mongo
+          image: mongo
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-mongo
+              containerPort: 27017
+          volumeMounts:
+            - name: mongo-volume
+              mountPath: /data/db

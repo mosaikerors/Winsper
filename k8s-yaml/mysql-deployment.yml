@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-mysql
+  namespace: default
+  labels:
+    name: winsper-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: winsper-mysql
+  template:
+    metadata:
+      labels:
+        name: winsper-mysql
+    spec:
+      volumes:
+        - name: mysql-volume
+          nfs:
+            server: 10.0.0.41
+            path: /data/mysql
+      containers:
+        - name: winsper-mysql
+          image: mysql
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-mysql
+              containerPort: 3306
+          volumeMounts:
+            - name: mysql-volume
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: mosaiker

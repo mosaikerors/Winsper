@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: winsper-hean
+  namespace: default
+  labels:
+    name: winsper-hean
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: winsper-hean
+  template:
+    metadata:
+      labels:
+        name: winsper-hean
+    spec:
+      containers:
+        - name: winsper-hean
+          image: gusabary/winsper-hean
+          imagePullPolicy: Always
+          ports:
+            - name: winsper-hean
+              containerPort: 7190

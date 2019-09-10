@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: winsper-eureka
+  namespace: default
+  labels:
+    name: winsper-eureka
+spec:
+  selector:
+    name: winsper-eureka
+  type: NodePort
+  ports:
+  - name: winsper-eureka
+    port: 7100
+    targetPort: 7100
+    nodePort: 30521
